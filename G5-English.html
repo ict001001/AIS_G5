@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 12 Math — Semester 1 Journey</title>
+
+<!-- Preconnect to external font origins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#101A33;
+    --navy-deep:#0A1226;
+    --paper:#FBF7EE;
+    --paper-dim:#F1EAD9;
+    --ink:#1B2438;
+    --slate:#5B6B8C;
+    --gold:#E3A94D;
+    --coral:#D9694F;   
+    --teal:#4FA69A;    
+    --violet:#8B6FC9;  
+    --crimson:#B23A48; 
+    --grey:#8A93A6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--navy);
+    color:var(--paper);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces', serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 6vw 24px;
+    background:radial-gradient(ellipse at top left, #17244A 0%, var(--navy) 55%);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12.5px;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,56px);
+    font-weight:700;
+    margin:0 0 14px;
+    max-width:14ch;
+    color:#fff;
+  }
+  .hero p{
+    max-width:60ch;
+    color:#C7CEDE;
+    font-size:17px;
+    margin:0 0 8px;
+  }
+  .hero .sub-note{
+    font-size:14px;
+    color:var(--grey);
+  }
+
+  /* ---------- CURVE NAV ---------- */
+  .curve-section{
+    padding:8px 4vw 40px;
+    background:var(--navy);
+    overflow-x:auto;
+  }
+  .curve-caption{
+    font-size:13px;
+    color:var(--grey);
+    padding:0 2vw 6px;
+    max-width:70ch;
+  }
+  .curve-svg-wrap{
+    min-width:1400px;
+    position:relative;
+  }
+  .curve-svg-wrap svg{width:100%;height:auto;display:block;}
+  .node{cursor:pointer;}
+  .node circle{transition:r .15s ease, filter .15s ease;}
+  .node:hover circle{filter:brightness(1.3);}
+  .node text{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    fill:#8892A8;
+  }
+  .node.active circle{stroke:#fff;stroke-width:2px;}
+
+  /* ---------- ASSESSMENT SUMMARY ---------- */
+  .assess-section{
+    padding:48px 6vw 24px;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .assess-section h2{font-size:26px;margin:0 0 6px;}
+  .assess-section > p{color:var(--slate);max-width:60ch;margin:0 0 28px;font-size:15px;}
+  .assess-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:16px;
+  }
+  .assess-card{
+    background:var(--paper-dim);
+    border-radius:10px;
+    padding:20px;
+    border-left:5px solid var(--gold);
+  }
+  .assess-card.midterm{border-left-color:var(--coral);}
+  .assess-card.pba{border-left-color:var(--violet);}
+  .assess-card.quiz{border-left-color:var(--teal);}
+  .assess-card.final{border-left-color:var(--crimson);}
+  .assess-card .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--slate);
+  }
+  .assess-card h3{margin:6px 0 8px;font-size:20px;}
+  .assess-card p.desc{margin:8px 0 0;font-size:14px;color:var(--slate);}
+
+  /* ---------- FILTERS ---------- */
+  .filter-bar{
+    padding:20px 6vw 0;
+    background:var(--paper);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .filter-btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    border:1px solid #D8CFB9;
+    background:#fff;
+    color:var(--ink);
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .filter-btn:hover{border-color:var(--ink);}
+  .filter-btn.active{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-section{
+    background:var(--paper);
+    padding:24px 6vw 64px;
+  }
+  .week-card{
+    background:#fff;
+    border:1px solid #EAE2CC;
+    border-radius:10px;
+    margin-bottom:12px;
+    overflow:hidden;
+    transition:box-shadow .15s ease;
+  }
+  .week-card.hidden{display:none;}
+  .week-card summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .week-card summary::-webkit-details-marker{display:none;}
+  .week-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:#fff;
+    background:var(--ink);
+    border-radius:6px;
+    padding:4px 8px;
+    min-width:44px;
+    text-align:center;
+    flex-shrink:0;
+  }
+  .week-meta{flex:1;min-width:0;}
+  .week-date{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    color:var(--slate);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .week-title{
+    font-size:17px;
+    font-weight:600;
+    color:var(--ink);
+    font-family:'Fraunces',serif;
+  }
+  .week-unit{font-size:12.5px;color:var(--slate);}
+  .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:999px;
+    color:#fff;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .badge.midterm{background:var(--coral);}
+  .badge.pba{background:var(--violet);}
+  .badge.quiz{background:var(--teal);}
+  .badge.final{background:var(--crimson);}
+  .badge.break{background:var(--grey);}
+  .badge.revision{background:var(--gold);color:var(--ink);}
+  .chev{color:var(--slate);transition:transform .15s ease;flex-shrink:0;}
+  details[open] .chev{transform:rotate(90deg);}
+  .week-body{
+    padding:4px 20px 24px 80px;
+    border-top:1px solid #F1EAD9;
+  }
+  .week-body ul{
+    margin:16px 0 0;
+    padding-left:20px;
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.6;
+  }
+  .week-body ul li{margin-bottom:2px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:var(--grey);
+    padding:32px 6vw;
+    font-size:13px;
+  }
+  footer strong{color:var(--paper);}
+
+  @media (max-width:640px){
+    .week-body{padding-left:20px;}
+    .week-num{display:none;}
+  }
+</style>
+
+<!-- Third party analytics scripts loaded asynchronously -->
+</head>
+<body>
+
+<div class="sticky-header">
+    <center>
+      <h2>
+        <a href="#" class="logo">Grade 5</a> · 
+        <a href="G5-English.html"   style="color: yellow;" >English</a> - 
+        <a href="G5-Math.html" >Math</a> - 
+        <a href="G5-Science.htm">Science</a> - 
+        <a href="index.html" >Arabic</a>
+      </h2>
+    </center>    
+</div>
+
+
+
+
+
+
+<header class="hero">
+<div class="eyebrow">Grade 5 · English · Semester 1 · 2026–2027</div><h1>Your Grade 5 English journey, week by week.</h1><p>Follow the semester from reading and vocabulary through grammar, spelling, and writing. Open any week to see the exact texts, skills, classwork, homework, and page references.</p><p class="sub-note">Tap any point on the journey — or any week below — to open the details.</p></header>
+<section class="curve-section"><div class="curve-caption">The semester journey — click a point to jump to that week.</div><div class="curve-svg-wrap"><svg id="curveSvg" viewBox="0 0 1400 190" xmlns="http://www.w3.org/2000/svg"></svg></div></section>
+<section class="assess-section"><h2>What students will work on</h2><p>Grade 5 English develops four connected strands throughout the semester.</p><div class="assess-grid"><div class="assess-card"><div class="label">Core Strand</div><h3>Reading & Comprehension</h3><p class="desc">Literary and informational texts, enrichment reading, cause and effect, author's claim, problem and solution, and theme.</p></div><div class="assess-card quiz"><div class="label">Core Strand</div><h3>Vocabulary & Spelling</h3><p class="desc">Homographs, context clues, vowel patterns, r-controlled vowels, plurals, syllables, contractions, and inflectional endings.</p></div><div class="assess-card pba"><div class="label">Core Strand</div><h3>Grammar</h3><p class="desc">Sentences, subjects and predicates, conjunctions, sentence combining, nouns, prepositional phrases, and verbs.</p></div><div class="assess-card midterm"><div class="label">Core Strand</div><h3>Writing</h3><p class="desc">Paragraph writing, personal narrative, how-to essays, descriptive writing, and free journal writing.</p></div></div></section>
+<div class="filter-bar" id="filterBar"></div><section class="timeline-section"><div id="timeline"></div></section>
+<footer><p><strong>Quick key:</strong> gold = Unit 1, teal = Unit 2, grey = breaks/semester close, crimson = final exams.</p><p style="margin-top:12px;">PB = Practice Book · RWC = Reading/Writing Companion · SB = Student Book · HW = Homework.</p></footer>
+<script>
+const weeks=[{"n": 1, "date": "Aug 23, 2026", "unit": "Orientation · No Science", "title": "Basic Concepts", "topics": ["Introduction to Grade 5 English", "Basic concepts and classroom routines"], "isBreak": false, "isFinal": false}, {"n": 2, "date": "Aug 30, 2026", "unit": "Unit 1", "title": "A Life in the Woods", "topics": ["Reading & Reading Skill: A Life in the Woods, RWC pp.12–21", "Vocabulary Skill: RWC pp.16–17; Homework: PB p.11", "Grammar: Sentences, PB pp.1–3; HW pp.4–5", "Spelling: Short Vowels, PB pp.7–8; HW pp.9–10", "Writing: Writing a Paragraph (Free Writing)"], "isBreak": false, "isFinal": false}, {"n": 3, "date": "Sep 6, 2026", "unit": "Unit 1", "title": "A Life in the Woods — Continued", "topics": ["Reading & Reading Skill: A Life in the Woods, RWC pp.12–21", "Vocabulary: Homographs, RWC p.17 / PB p.24", "Reading Skill: Cause and Effect, RWC pp.20–21", "Grammar: Subjects and Predicates, PB pp.13–15; HW p.17", "Spelling: Long Vowels, PB pp.19–20; HW pp.21–22", "Writing: Personal Narrative"], "isBreak": false, "isFinal": false}, {"n": 4, "date": "Sep 13, 2026", "unit": "Unit 1 · Enrichment", "title": "Enrichment Reading & Personal Narrative", "topics": ["Reading & Reading Skill: Enrichment Reading", "Grammar: Compound Sentences and Conjunctions, PB pp.25–27; HW p.29", "Spelling: Words with /ū/, /u˙/, /ü/, PB pp.31–32; HW pp.33–34", "Writing: Personal Narrative", "Free Journal Writing: Unstructured personal writing"], "isBreak": false, "isFinal": false}, {"n": 5, "date": "Sep 20, 2026", "unit": "Unit 1 · Saudi National Day", "title": "A Fresh Idea", "topics": ["Saudi National Day: Sep 23–24", "Reading & Reading Skill: A Fresh Idea, RWC pp.38–47", "Vocabulary: RWC p.43 — Context Clues / PB p.48", "Grammar: Sentence Combining, PB pp.37–39; HW p.41", "Spelling: r-Controlled Vowels, PB pp.43–44; HW pp.45–46", "Writing: Personal Narrative"], "isBreak": false, "isFinal": false}, {"n": 6, "date": "Sep 27, 2026", "unit": "Unit 1", "title": "A Fresh Idea — Continued", "topics": ["Reading & Reading Skill: A Fresh Idea, RWC pp.38–47", "Vocabulary: RWC p.43 — Context Clues / PB p.48", "Grammar: Run-on Sentences and Fragments, PB pp.49–51; HW p.53", "Spelling: r-Controlled Vowel /ûr/, PB pp.55–56; HW pp.57–58", "Writing: Personal Narrative"], "isBreak": false, "isFinal": false}, {"n": 7, "date": "Oct 4, 2026", "unit": "Unit 1 · Enrichment", "title": "Enrichment Reading & Free Journal Writing", "topics": ["Reading & Reading Skill: Enrichment Reading", "Grammar: Common and Proper Nouns, PB pp.61–63; HW p.65", "Spelling: Variant Vowel /ô/; Diphthongs /oi/, /ou/, PB pp.67–68; HW pp.69–70", "Free Journal Writing: Unstructured personal writing"], "isBreak": false, "isFinal": false}, {"n": 8, "date": "Oct 11, 2026", "unit": "Unit 1", "title": "Are Electronic Devices Good for Us?", "topics": ["Reading & Reading Skill: Are Electronic Devices Good for Us?, RWC pp.64–73", "Vocabulary Skill: PB p.72", "Reading Skill: Author's Claim, pp.72–73", "Spelling: Plurals, PB pp.79–80; HW p.82", "Grammar: Singular and Plural Nouns, PB pp.73–75; HW p.77", "Writing: How-to Essay"], "isBreak": false, "isFinal": false}, {"n": 9, "date": "Oct 18, 2026", "unit": "Unit 1", "title": "Are Electronic Devices Good for Us? — Continued", "topics": ["Reading & Reading Skill: Are Electronic Devices Good for Us?, RWC pp.64–73", "Vocabulary Skill: PB p.72", "Reading Skill: Author's Claim, pp.72–73", "Spelling: Inflectional Endings, PB pp.91–92; HW p.94", "Grammar: More Plural Nouns and Collective Nouns, PB pp.85–87; HW p.89", "Writing: How-to Essay"], "isBreak": false, "isFinal": false}, {"n": 10, "date": "Oct 25, 2026", "unit": "Unit 1 · Enrichment", "title": "Enrichment Reading", "topics": ["Reading & Reading Skill: Enrichment Reading", "Spelling: Contractions, PB pp.103–104; HW p.106", "Grammar: Possessive Nouns, PB pp.97–99; HW p.101", "Writing: How-to Essay", "Free Journal Writing: Unstructured personal writing"], "isBreak": false, "isFinal": false}, {"n": 11, "date": "Nov 1, 2026", "unit": "Unit 2", "title": "Creating a Nation", "topics": ["Reading & Reading Skill: Creating a Nation, RWC pp.126–135", "Vocabulary Skill: PB p.96", "Reading Skill: Problem and Solution, SB pp.134–135", "Grammar: Prepositional Phrases, PB pp.109–111; HW p.113", "Spelling: Closed Syllables, PB pp.115–116; HW pp.117–118"], "isBreak": false, "isFinal": false}, {"n": 12, "date": "Nov 8, 2026", "unit": "Unit 2", "title": "Creating a Nation — Continued", "topics": ["Reading & Reading Skill: Creating a Nation, RWC pp.126–135", "Vocabulary Skill: PB p.96", "Reading Skill: Problem and Solution, SB pp.134–135", "Grammar: Action Verbs, PB pp.121–123; HW p.125", "Spelling: Open Syllables, PB pp.127–128; HW p.130", "Writing: Descriptive Writing"], "isBreak": false, "isFinal": false}, {"n": 13, "date": "Nov 15, 2026", "unit": "Unit 2 · Enrichment", "title": "Enrichment Reading & Descriptive Writing", "topics": ["Reading & Reading Skill: Enrichment Reading", "Grammar: Verb Tenses, PB pp.133–135; HW p.137", "Spelling: Open Syllables (V/V), PB pp.139–140; HW pp.141–142", "Writing: Descriptive Writing", "Free Journal Writing: Unstructured personal writing"], "isBreak": false, "isFinal": false}, {"n": 14, "date": "Nov 22, 2026", "unit": "Break", "title": "Autumn Break", "topics": ["No classes — Autumn Break"], "isBreak": true, "isFinal": false}, {"n": 15, "date": "Nov 29, 2026", "unit": "Unit 2", "title": "The Magical Lost Brocade", "topics": ["Reading & Reading Skill: The Magical Lost Brocade, RWC pp.152–161", "Vocabulary Skill: SB pp.156–157; PB p.107", "Reading Skill: Theme, SB pp.160–161", "Grammar: Verb Tenses, PB pp.133–135; HW p.137", "Spelling: Open Syllables (V/V), PB pp.139–140; HW pp.141–142", "Writing: Descriptive Writing"], "isBreak": false, "isFinal": false}, {"n": 16, "date": "Dec 6, 2026", "unit": "Unit 2", "title": "The Magical Lost Brocade — Continued", "topics": ["Reading & Reading Skill: The Magical Lost Brocade, RWC pp.152–161", "Vocabulary Skill: SB pp.156–157; PB p.107", "Reading Skill: Theme, SB pp.160–161", "Grammar: Main and Helping Verbs, PB pp.145–147; HW p.149", "Spelling: Vowel Team Syllables, PB pp.151–152; HW pp.153–154"], "isBreak": false, "isFinal": false}, {"n": 17, "date": "Dec 13, 2026", "unit": "Unit 2 · Enrichment", "title": "Enrichment Reading", "topics": ["Reading & Reading Skill: Enrichment Reading", "Grammar: Linking Verbs, PB pp.157–159; HW p.161", "Spelling: Consonant + le Syllables, PB pp.163–164; HW pp.165–166"], "isBreak": false, "isFinal": false}, {"n": 18, "date": "Dec 20, 2026", "unit": "Semester Close", "title": "Week 18", "topics": ["No curriculum content was specified for this week in the provided plan."], "isBreak": false, "isFinal": false}, {"n": 19, "date": "Final Exams", "unit": "Final Exams", "title": "Semester 1 Final Exams", "topics": ["Final examinations"], "isBreak": false, "isFinal": true}, {"n": 20, "date": "Final Exams", "unit": "Final Exams", "title": "Semester 1 Final Exams — Continued", "topics": ["Final examinations and semester close"], "isBreak": false, "isFinal": true}];
+function unitKey(unit){if(unit.includes('Unit 1')) return 'Unit 1';if(unit.includes('Unit 2')) return 'Unit 2';if(unit==='Break') return 'Break';if(unit.includes('Final')) return 'Final';return 'Orientation';}
+function renderTimeline(filter){const el=document.getElementById('timeline');el.innerHTML=weeks.map(w=>{const uk=unitKey(w.unit);const show=filter==='all'||uk===filter;let badge=w.isBreak?'<span class="badge break">Break</span>':w.isFinal?'<span class="badge final">Final Exams</span>':'';return `<details class="week-card ${show?'':'hidden'}" data-week="${w.n}"><summary><div class="week-num mono">W${w.n}</div><div class="week-meta"><div class="week-date">${w.date}</div><div class="week-title">${w.title}</div><div class="week-unit">${w.unit}</div></div>${badge}<div class="chev">▶</div></summary><div class="week-body"><ul>${w.topics.map(t=>`<li>${t}</li>`).join('')}</ul></div></details>`;}).join('');}
+function renderFilters(){const opts=[['all','All Weeks'],['Unit 1','Unit 1'],['Unit 2','Unit 2'],['Break','Break'],['Final','Final Exams']];const bar=document.getElementById('filterBar');bar.innerHTML=opts.map((o,i)=>`<button class="filter-btn ${i===0?'active':''}" data-key="${o[0]}">${o[1]}</button>`).join('');bar.querySelectorAll('.filter-btn').forEach(btn=>btn.onclick=()=>{bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTimeline(btn.dataset.key);});}
+function color(w){let k=unitKey(w.unit);return k==='Unit 1'?'#E3A94D':k==='Unit 2'?'#4FA69A':k==='Final'?'#B23A48':'#8A93A6';}
+function buildCurve(){const svg=document.getElementById('curveSvg'),n=weeks.length,w=1400,marginX=40,marginY=46,amp=42;let path='',pts=[];for(let i=0;i<n;i++){let x=marginX+(i/(n-1))*(w-marginX*2),y=marginY+amp*Math.sin((i/(n-1))*Math.PI*2.4)+amp*.4;pts.push({x,y});path+=(i?' L ':'M ')+x+' '+y;}let s=`<path d="${path}" fill="none" stroke="#2A3B66" stroke-width="2.5"/>`;weeks.forEach((wk,i)=>{let p=pts[i],r=(wk.isBreak||wk.isFinal)?8:5;s+=`<g class="node" data-week="${wk.n}" transform="translate(${p.x},${p.y})"><circle r="${r}" fill="${color(wk)}"/><text x="0" y="${p.y>95?-16:24}" text-anchor="middle">W${wk.n}</text></g>`;});svg.innerHTML=s;svg.querySelectorAll('.node').forEach(node=>node.onclick=()=>{document.querySelector('.filter-btn[data-key="all"]').click();let c=document.querySelector(`.week-card[data-week="${node.dataset.week}"]`);if(c){c.open=true;c.scrollIntoView({behavior:'smooth',block:'center'});}});}
+renderFilters();renderTimeline('all');buildCurve();
+</script>
+</body>
+</html>
